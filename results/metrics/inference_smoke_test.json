@@ -1,0 +1,79 @@
+{
+  "timestamp": "2026-09-28T18:51:24.070508+00:00",
+  "smoke_test_status": "PASSED",
+  "artifacts_loaded": {
+    "primary_model": "models/hgb_model.joblib",
+    "secondary_model": "models/xgboost_model.json",
+    "preprocessor": "models/preprocessor.joblib",
+    "feature_schema": "models/feature_schema.json",
+    "label_mapping": "models/label_mapping.json",
+    "load_time_ms": 2311.99
+  },
+  "example_predictions": {
+    "safe_sample": {
+      "input": {
+        "distance_m": 72.0,
+        "object_x_m": 5.0,
+        "object_y_m": 71.8,
+        "object_z_m": 0.0,
+        "object_width_m": 2.2,
+        "object_height_m": 1.6,
+        "object_length_m": 4.5,
+        "point_count": 90,
+        "relative_velocity_mps": 0.0,
+        "truck_speed_kmph": 18.0,
+        "time_to_collision_s": 99.9,
+        "object_type": "car"
+      },
+      "predicted_risk_level": "SAFE",
+      "risk_code": 0,
+      "confidence": 0.9994,
+      "probabilities": {
+        "SAFE": 0.9994,
+        "CAUTION": 0.0006,
+        "WARNING": 0.0,
+        "CRITICAL": 0.0
+      },
+      "recommended_action": "no immediate hazard"
+    },
+    "critical_sample": {
+      "input": {
+        "distance_m": 6.0,
+        "object_x_m": 1.0,
+        "object_y_m": 5.9,
+        "object_z_m": 0.4,
+        "object_width_m": 3.4,
+        "object_height_m": 3.6,
+        "object_length_m": 7.2,
+        "point_count": 780,
+        "relative_velocity_mps": -9.2,
+        "truck_speed_kmph": 30.0,
+        "time_to_collision_s": 0.65,
+        "object_type": "truck"
+      },
+      "predicted_risk_level": "CRITICAL",
+      "risk_code": 3,
+      "confidence": 0.9587,
+      "probabilities": {
+        "SAFE": 0.0008,
+        "CAUTION": 0.024,
+        "WARNING": 0.0164,
+        "CRITICAL": 0.9587
+      },
+      "recommended_action": "immediate hazard / urgent intervention"
+    }
+  },
+  "latency_profile_ms": {
+    "iterations": 500,
+    "warmup_iterations": 50,
+    "mean_ms": 9.2613,
+    "median_p50_ms": 8.9548,
+    "p95_ms": 12.2019,
+    "p99_ms": 13.4503,
+    "min_ms": 7.0373,
+    "max_ms": 15.4025,
+    "meets_50ms_target": true,
+    "margin_ms": 40.7387
+  },
+  "disclaimer": "Prototype decision support output based on synthetic LiDAR features. Does NOT certify physical haul truck safety."
+}

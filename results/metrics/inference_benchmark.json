@@ -1,0 +1,107 @@
+{
+  "benchmark_environment": {
+    "python_version": "3.14.7",
+    "cpu_architecture": "AMD64",
+    "platform": "Windows 11",
+    "iterations_single_sample": 1000,
+    "warmup_iterations": 50
+  },
+  "single_sample_latency_ms": {
+    "mean_ms": 9.4609,
+    "median_ms": 9.1047,
+    "p95_ms": 12.7041,
+    "p99_ms": 14.3337,
+    "min_ms": 5.966,
+    "max_ms": 41.9871,
+    "std_ms": 1.9075
+  },
+  "single_sample_breakdown_ms": {
+    "input_validation": {
+      "mean_ms": 0.0425,
+      "median_ms": 0.0432,
+      "p95_ms": 0.055,
+      "p99_ms": 0.063,
+      "min_ms": 0.0228,
+      "max_ms": 0.1219,
+      "std_ms": 0.0094
+    },
+    "preprocessing_transformation": {
+      "mean_ms": 2.6461,
+      "median_ms": 2.5489,
+      "p95_ms": 3.4993,
+      "p99_ms": 3.9215,
+      "min_ms": 1.7188,
+      "max_ms": 6.5428,
+      "std_ms": 0.4948
+    },
+    "primary_model_forward_pass": {
+      "mean_ms": 6.7492,
+      "median_ms": 6.4808,
+      "p95_ms": 9.5136,
+      "p99_ms": 10.4788,
+      "min_ms": 3.934,
+      "max_ms": 22.6459,
+      "std_ms": 1.3596
+    }
+  },
+  "batch_inference_benchmarks": {
+    "batch_5": {
+      "batch_size": 5,
+      "total_latency": {
+        "mean_ms": 8.4189,
+        "median_ms": 8.2026,
+        "p95_ms": 10.4865,
+        "p99_ms": 11.6652,
+        "min_ms": 6.5326,
+        "max_ms": 11.8537,
+        "std_ms": 0.9989
+      },
+      "per_sample_latency_us": 1683.78,
+      "effective_throughput_fps": 593.9
+    },
+    "batch_20": {
+      "batch_size": 20,
+      "total_latency": {
+        "mean_ms": 8.8419,
+        "median_ms": 8.7112,
+        "p95_ms": 11.8297,
+        "p99_ms": 12.4448,
+        "min_ms": 6.4142,
+        "max_ms": 12.4541,
+        "std_ms": 1.1164
+      },
+      "per_sample_latency_us": 442.1,
+      "effective_throughput_fps": 2262.0
+    },
+    "batch_100": {
+      "batch_size": 100,
+      "total_latency": {
+        "mean_ms": 11.8855,
+        "median_ms": 11.3362,
+        "p95_ms": 14.341,
+        "p99_ms": 19.9958,
+        "min_ms": 8.3006,
+        "max_ms": 56.1142,
+        "std_ms": 4.7402
+      },
+      "per_sample_latency_us": 118.86,
+      "effective_throughput_fps": 8413.6
+    }
+  },
+  "dual_voter_inference_ms": {
+    "mean_ms": 13.9317,
+    "median_ms": 13.7479,
+    "p95_ms": 15.9909,
+    "p99_ms": 17.4281,
+    "min_ms": 11.794,
+    "max_ms": 19.0311,
+    "std_ms": 1.2122
+  },
+  "real_time_budget_evaluation": {
+    "budget_ms": 50.0,
+    "measured_mean_single_ms": 9.4609,
+    "budget_utilization_pct": 18.92,
+    "meets_10hz_lidar_cycle": true,
+    "meets_20hz_lidar_cycle": true
+  }
+}

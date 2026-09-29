@@ -1,0 +1,298 @@
+{
+  "xgboost": {
+    "model_name": "XGBoost",
+    "overall": {
+      "accuracy": 0.856,
+      "log_loss": 0.3398,
+      "macro_precision": 0.8473,
+      "macro_recall": 0.8399,
+      "macro_f1": 0.8435,
+      "weighted_precision": 0.8562,
+      "weighted_recall": 0.856,
+      "weighted_f1": 0.856
+    },
+    "per_class": {
+      "SAFE": {
+        "precision": 0.9069,
+        "recall": 0.9205,
+        "f1_score": 0.9137,
+        "support": 1334
+      },
+      "CAUTION": {
+        "precision": 0.7448,
+        "recall": 0.7532,
+        "f1_score": 0.749,
+        "support": 713
+      },
+      "WARNING": {
+        "precision": 0.7987,
+        "recall": 0.7787,
+        "f1_score": 0.7886,
+        "support": 479
+      },
+      "CRITICAL": {
+        "precision": 0.9389,
+        "recall": 0.9072,
+        "f1_score": 0.9227,
+        "support": 474
+      }
+    },
+    "safety_critical": {
+      "CRITICAL_recall": 0.9072,
+      "CRITICAL_precision": 0.9389,
+      "CRITICAL_f1": 0.9227,
+      "CRITICAL_total_true": 474,
+      "CRITICAL_true_positives": 430,
+      "CRITICAL_total_false_negatives": 44,
+      "CRITICAL_to_SAFE_catastrophic": 0,
+      "CRITICAL_to_CAUTION_severe": 0,
+      "CRITICAL_to_WARNING_conservative": 44,
+      "WARNING_recall": 0.7787,
+      "WARNING_precision": 0.7987,
+      "WARNING_f1": 0.7886,
+      "WARNING_total_true": 479,
+      "WARNING_true_positives": 373,
+      "WARNING_total_false_negatives": 78,
+      "WARNING_to_SAFE_severe": 0,
+      "WARNING_to_CAUTION": 78,
+      "WARNING_to_CRITICAL_escalation": 28
+    },
+    "error_tier_audit": {
+      "exact_matches": 2568,
+      "exact_pct": 85.6,
+      "adjacent_tier_errors": 432,
+      "adjacent_pct": 14.4,
+      "catastrophic_tier_errors": 0,
+      "catastrophic_pct": 0.0
+    },
+    "confidence_behavior": {
+      "mean_confidence": 0.8633,
+      "mean_confidence_correct": 0.8891,
+      "mean_confidence_incorrect": 0.7096,
+      "high_confidence_threshold": 0.9,
+      "high_confidence_samples": 1632,
+      "high_confidence_accuracy": 0.9718,
+      "low_confidence_threshold": 0.6,
+      "low_confidence_samples": 254,
+      "low_confidence_accuracy": 0.5236
+    },
+    "inference_benchmark": {
+      "file_size_kb": 7851.79,
+      "file_size_mb": 7.67,
+      "batch_latency_ms": 11.38,
+      "batch_per_sample_us": 3.79,
+      "single_sample_latency_ms": 1.559,
+      "throughput_samples_per_sec": 263519.4
+    },
+    "confusion_matrix_raw": [
+      [
+        1228,
+        106,
+        0,
+        0
+      ],
+      [
+        126,
+        537,
+        50,
+        0
+      ],
+      [
+        0,
+        78,
+        373,
+        28
+      ],
+      [
+        0,
+        0,
+        44,
+        430
+      ]
+    ],
+    "confusion_matrix_normalized": [
+      [
+        0.9205,
+        0.0795,
+        0.0,
+        0.0
+      ],
+      [
+        0.1767,
+        0.7532,
+        0.0701,
+        0.0
+      ],
+      [
+        0.0,
+        0.1628,
+        0.7787,
+        0.0585
+      ],
+      [
+        0.0,
+        0.0,
+        0.0928,
+        0.9072
+      ]
+    ]
+  },
+  "hist_gradient_boosting": {
+    "model_name": "HistGradientBoosting",
+    "overall": {
+      "accuracy": 0.8523,
+      "log_loss": 0.3425,
+      "macro_precision": 0.8443,
+      "macro_recall": 0.8374,
+      "macro_f1": 0.8407,
+      "weighted_precision": 0.8519,
+      "weighted_recall": 0.8523,
+      "weighted_f1": 0.852
+    },
+    "per_class": {
+      "SAFE": {
+        "precision": 0.9001,
+        "recall": 0.919,
+        "f1_score": 0.9095,
+        "support": 1334
+      },
+      "CAUTION": {
+        "precision": 0.7404,
+        "recall": 0.7321,
+        "f1_score": 0.7362,
+        "support": 713
+      },
+      "WARNING": {
+        "precision": 0.7954,
+        "recall": 0.7871,
+        "f1_score": 0.7912,
+        "support": 479
+      },
+      "CRITICAL": {
+        "precision": 0.9412,
+        "recall": 0.9114,
+        "f1_score": 0.926,
+        "support": 474
+      }
+    },
+    "safety_critical": {
+      "CRITICAL_recall": 0.9114,
+      "CRITICAL_precision": 0.9412,
+      "CRITICAL_f1": 0.926,
+      "CRITICAL_total_true": 474,
+      "CRITICAL_true_positives": 432,
+      "CRITICAL_total_false_negatives": 42,
+      "CRITICAL_to_SAFE_catastrophic": 0,
+      "CRITICAL_to_CAUTION_severe": 0,
+      "CRITICAL_to_WARNING_conservative": 42,
+      "WARNING_recall": 0.7871,
+      "WARNING_precision": 0.7954,
+      "WARNING_f1": 0.7912,
+      "WARNING_total_true": 479,
+      "WARNING_true_positives": 377,
+      "WARNING_total_false_negatives": 75,
+      "WARNING_to_SAFE_severe": 0,
+      "WARNING_to_CAUTION": 75,
+      "WARNING_to_CRITICAL_escalation": 27
+    },
+    "error_tier_audit": {
+      "exact_matches": 2557,
+      "exact_pct": 85.23,
+      "adjacent_tier_errors": 443,
+      "adjacent_pct": 14.77,
+      "catastrophic_tier_errors": 0,
+      "catastrophic_pct": 0.0
+    },
+    "confidence_behavior": {
+      "mean_confidence": 0.8678,
+      "mean_confidence_correct": 0.8943,
+      "mean_confidence_incorrect": 0.715,
+      "high_confidence_threshold": 0.9,
+      "high_confidence_samples": 1677,
+      "high_confidence_accuracy": 0.966,
+      "low_confidence_threshold": 0.6,
+      "low_confidence_samples": 236,
+      "low_confidence_accuracy": 0.5297
+    },
+    "inference_benchmark": {
+      "file_size_kb": 2273.36,
+      "file_size_mb": 2.22,
+      "batch_latency_ms": 24.13,
+      "batch_per_sample_us": 8.04,
+      "single_sample_latency_ms": 6.106,
+      "throughput_samples_per_sec": 124303.5
+    },
+    "confusion_matrix_raw": [
+      [
+        1226,
+        108,
+        0,
+        0
+      ],
+      [
+        136,
+        522,
+        55,
+        0
+      ],
+      [
+        0,
+        75,
+        377,
+        27
+      ],
+      [
+        0,
+        0,
+        42,
+        432
+      ]
+    ],
+    "confusion_matrix_normalized": [
+      [
+        0.919,
+        0.081,
+        0.0,
+        0.0
+      ],
+      [
+        0.1907,
+        0.7321,
+        0.0771,
+        0.0
+      ],
+      [
+        0.0,
+        0.1566,
+        0.7871,
+        0.0564
+      ],
+      [
+        0.0,
+        0.0,
+        0.0886,
+        0.9114
+      ]
+    ]
+  },
+  "prediction_agreement": {
+    "total_test_samples": 3000,
+    "same_prediction_count": 2910,
+    "different_prediction_count": 90,
+    "agreement_percentage": 97.0,
+    "disagreement_analysis": {
+      "hgb_more_conservative_count": 46,
+      "hgb_more_conservative_pct": 51.11,
+      "xgb_more_conservative_count": 44,
+      "xgb_more_conservative_pct": 48.89,
+      "hgb_correct_when_disagreeing": 39,
+      "xgb_correct_when_disagreeing": 50,
+      "both_wrong_when_disagreeing": 1
+    }
+  },
+  "production_recommendation": {
+    "selected_model": "HistGradientBoostingClassifier",
+    "artifact_path": "models/hgb_model.joblib",
+    "primary_rationale": "Superior CRITICAL recall (91.14% vs 90.72%) and WARNING recall (78.71% vs 77.87%), 3.45x smaller model footprint, zero external C++ dependencies, and sub-10ms real-time inference latency."
+  }
+}

@@ -1,0 +1,9 @@
+scenario_id,scenario_name,expected_threat,predicted_threat,objects_detected,objects_evaluated,errors_count,perception_ms,ros2_ml_ms,ros2_pub_ms,fastapi_ms,total_e2e_ms,fastapi_forward_status,verdict
+Scenario_A,"SAFE Pedestrian (36.2m, receding)",SAFE,SAFE,1,1,0,0.061,30.409,0.008,0.041,30.523,in_process_dispatched,PASS
+Scenario_B,"CAUTION Vehicle (12.8m, lateral zone)",CAUTION,CAUTION,1,1,0,0.057,10.637,0.008,0.024,10.73,in_process_dispatched,PASS
+Scenario_C,"WARNING Worker (15.7m, closing)",WARNING,WARNING,1,1,0,0.046,12.712,0.007,0.027,12.796,in_process_dispatched,PASS
+Scenario_D,"CRITICAL Imminent Car (6.3m, head-on)",CRITICAL,CRITICAL,1,1,0,0.047,9.271,0.005,0.018,9.343,in_process_dispatched,PASS
+Scenario_E,"Mixed Quad Frame (SAFE, CAUTION, WARNING, CRITICAL)",CRITICAL,CRITICAL,4,4,0,0.082,9.912,0.012,0.036,10.045,in_process_dispatched,PASS
+Scenario_F,Invalid Negative Range (-15m),INVALID,INVALID,1,0,1,0.072,0.309,0.007,0.021,0.414,in_process_dispatched,PASS
+Scenario_G,Unknown Type (Novel Drone),SAFE,SAFE,1,1,0,0.041,9.686,0.007,0.02,9.756,in_process_dispatched,PASS
+Scenario_H,Simultaneous Threats (WARNING + CRITICAL),CRITICAL,CRITICAL,2,2,0,0.057,9.485,0.008,0.022,9.574,in_process_dispatched,PASS

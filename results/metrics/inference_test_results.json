@@ -1,0 +1,83 @@
+{
+  "all_tests_passed": true,
+  "total_tests": 15,
+  "passed_count": 15,
+  "failed_count": 0,
+  "test_details": [
+    {
+      "test_name": "1. Valid SAFE-like Input",
+      "description": "Distant stationary vehicle correctly predicted as SAFE (class_id=0, status=valid)",
+      "status": "PASS"
+    },
+    {
+      "test_name": "2. Valid CAUTION-like Input",
+      "description": "Moderate distance excavator yields valid low/moderate risk assessment",
+      "status": "PASS"
+    },
+    {
+      "test_name": "3. Valid WARNING-like Input",
+      "description": "Approaching crane at 20m produces valid risk prediction and schema fields",
+      "status": "PASS"
+    },
+    {
+      "test_name": "4. Valid CRITICAL-like Input",
+      "description": "Approaching haul truck at 5.5m correctly predicted as CRITICAL with high confidence",
+      "status": "PASS"
+    },
+    {
+      "test_name": "5. Missing Field Rejection",
+      "description": "Omitting required observation field raises InferenceValidationError",
+      "status": "PASS"
+    },
+    {
+      "test_name": "6. NaN Input Rejection",
+      "description": "NaN value in sensor field raises InferenceValidationError",
+      "status": "PASS"
+    },
+    {
+      "test_name": "7. Infinite Input Rejection",
+      "description": "Infinite value in distance_m raises InferenceValidationError",
+      "status": "PASS"
+    },
+    {
+      "test_name": "8. Invalid Negative Physical Value",
+      "description": "Negative distance_m raises physical bounds InferenceValidationError",
+      "status": "PASS"
+    },
+    {
+      "test_name": "9. Unknown Object Type Handling",
+      "description": "Unseen object_type safely handled with zero-filled OHE features",
+      "status": "PASS"
+    },
+    {
+      "test_name": "10. Prediction Determinism",
+      "description": "Repeated inference on identical inputs returns bitwise identical outputs",
+      "status": "PASS"
+    },
+    {
+      "test_name": "11. Probability Vector Normalization",
+      "description": "Output 4-class probabilities sum to 1.0 +/- 0.001",
+      "status": "PASS"
+    },
+    {
+      "test_name": "12. Argmax Consistency",
+      "description": "Predicted risk class matches key with highest probability exactly",
+      "status": "PASS"
+    },
+    {
+      "test_name": "13. Label Mapping Agreement",
+      "description": "Output keys and class_id match models/label_mapping.json strictly",
+      "status": "PASS"
+    },
+    {
+      "test_name": "14. Feature Schema Ordering",
+      "description": "Preprocessor output preserves exact 17-feature order from models/feature_schema.json",
+      "status": "PASS"
+    },
+    {
+      "test_name": "15. Serialized Model Reload Verification",
+      "description": "Clean reloaded engine from disk reproduces bitwise identical predictions",
+      "status": "PASS"
+    }
+  ]
+}

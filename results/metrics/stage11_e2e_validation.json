@@ -1,0 +1,308 @@
+{
+  "stage": "Stage 11: Full System Integration (Perception -> ROS 2 -> ML -> FastAPI -> WebSocket)",
+  "timestamp": "2026-09-28T19:48:15.297344+00:00",
+  "model_selection": {
+    "primary_model": "HistGradientBoostingClassifier",
+    "primary_model_artifact": "models/hgb_model.joblib",
+    "preprocessor_artifact": "models/preprocessor.joblib",
+    "feature_schema_artifact": "models/feature_schema.json",
+    "label_mapping_artifact": "models/label_mapping.json",
+    "secondary_model_artifact": "models/xgboost_model.json",
+    "features_count": 17,
+    "classes": [
+      "SAFE",
+      "CAUTION",
+      "WARNING",
+      "CRITICAL"
+    ]
+  },
+  "system_environment": {
+    "python_version": "3.14.7",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "ros2_available_on_host": false
+  },
+  "data_flow_interfaces": {
+    "perception_adapter": "src/perception/mock_lidar_adapter.py (MockLiDARPerceptionAdapter)",
+    "ros2_input_topic": "/minerakshak/object_observations",
+    "ros2_output_prediction_topic": "/minerakshak/risk_prediction",
+    "ros2_output_threat_topic": "/minerakshak/highest_threat",
+    "fastapi_endpoints": [
+      "/api/minerakshak/risk_prediction",
+      "/api/minerakshak/highest_threat",
+      "/api/minerakshak/latest_risk",
+      "/api/minerakshak/health",
+      "/api/dashboard"
+    ],
+    "websocket_endpoints": [
+      "/ws/dashboard",
+      "/ws/minerakshak/risk"
+    ]
+  },
+  "demonstration_scenarios": [
+    {
+      "scenario_id": "Scenario_A",
+      "scenario_name": "SAFE Pedestrian (36.2m, receding)",
+      "expected_threat": "SAFE",
+      "predicted_threat": "SAFE",
+      "objects_detected": 1,
+      "objects_evaluated": 1,
+      "errors_count": 0,
+      "perception_ms": 0.061,
+      "ros2_ml_ms": 30.409,
+      "ros2_pub_ms": 0.008,
+      "fastapi_ms": 0.041,
+      "total_e2e_ms": 30.523,
+      "fastapi_forward_status": "in_process_dispatched",
+      "verdict": "PASS"
+    },
+    {
+      "scenario_id": "Scenario_B",
+      "scenario_name": "CAUTION Vehicle (12.8m, lateral zone)",
+      "expected_threat": "CAUTION",
+      "predicted_threat": "CAUTION",
+      "objects_detected": 1,
+      "objects_evaluated": 1,
+      "errors_count": 0,
+      "perception_ms": 0.057,
+      "ros2_ml_ms": 10.637,
+      "ros2_pub_ms": 0.008,
+      "fastapi_ms": 0.024,
+      "total_e2e_ms": 10.73,
+      "fastapi_forward_status": "in_process_dispatched",
+      "verdict": "PASS"
+    },
+    {
+      "scenario_id": "Scenario_C",
+      "scenario_name": "WARNING Worker (15.7m, closing)",
+      "expected_threat": "WARNING",
+      "predicted_threat": "WARNING",
+      "objects_detected": 1,
+      "objects_evaluated": 1,
+      "errors_count": 0,
+      "perception_ms": 0.046,
+      "ros2_ml_ms": 12.712,
+      "ros2_pub_ms": 0.007,
+      "fastapi_ms": 0.027,
+      "total_e2e_ms": 12.796,
+      "fastapi_forward_status": "in_process_dispatched",
+      "verdict": "PASS"
+    },
+    {
+      "scenario_id": "Scenario_D",
+      "scenario_name": "CRITICAL Imminent Car (6.3m, head-on)",
+      "expected_threat": "CRITICAL",
+      "predicted_threat": "CRITICAL",
+      "objects_detected": 1,
+      "objects_evaluated": 1,
+      "errors_count": 0,
+      "perception_ms": 0.047,
+      "ros2_ml_ms": 9.271,
+      "ros2_pub_ms": 0.005,
+      "fastapi_ms": 0.018,
+      "total_e2e_ms": 9.343,
+      "fastapi_forward_status": "in_process_dispatched",
+      "verdict": "PASS"
+    },
+    {
+      "scenario_id": "Scenario_E",
+      "scenario_name": "Mixed Quad Frame (SAFE, CAUTION, WARNING, CRITICAL)",
+      "expected_threat": "CRITICAL",
+      "predicted_threat": "CRITICAL",
+      "objects_detected": 4,
+      "objects_evaluated": 4,
+      "errors_count": 0,
+      "perception_ms": 0.082,
+      "ros2_ml_ms": 9.912,
+      "ros2_pub_ms": 0.012,
+      "fastapi_ms": 0.036,
+      "total_e2e_ms": 10.045,
+      "fastapi_forward_status": "in_process_dispatched",
+      "verdict": "PASS"
+    },
+    {
+      "scenario_id": "Scenario_F",
+      "scenario_name": "Invalid Negative Range (-15m)",
+      "expected_threat": "INVALID",
+      "predicted_threat": "INVALID",
+      "objects_detected": 1,
+      "objects_evaluated": 0,
+      "errors_count": 1,
+      "perception_ms": 0.072,
+      "ros2_ml_ms": 0.309,
+      "ros2_pub_ms": 0.007,
+      "fastapi_ms": 0.021,
+      "total_e2e_ms": 0.414,
+      "fastapi_forward_status": "in_process_dispatched",
+      "verdict": "PASS"
+    },
+    {
+      "scenario_id": "Scenario_G",
+      "scenario_name": "Unknown Type (Novel Drone)",
+      "expected_threat": "SAFE",
+      "predicted_threat": "SAFE",
+      "objects_detected": 1,
+      "objects_evaluated": 1,
+      "errors_count": 0,
+      "perception_ms": 0.041,
+      "ros2_ml_ms": 9.686,
+      "ros2_pub_ms": 0.007,
+      "fastapi_ms": 0.02,
+      "total_e2e_ms": 9.756,
+      "fastapi_forward_status": "in_process_dispatched",
+      "verdict": "PASS"
+    },
+    {
+      "scenario_id": "Scenario_H",
+      "scenario_name": "Simultaneous Threats (WARNING + CRITICAL)",
+      "expected_threat": "CRITICAL",
+      "predicted_threat": "CRITICAL",
+      "objects_detected": 2,
+      "objects_evaluated": 2,
+      "errors_count": 0,
+      "perception_ms": 0.057,
+      "ros2_ml_ms": 9.485,
+      "ros2_pub_ms": 0.008,
+      "fastapi_ms": 0.022,
+      "total_e2e_ms": 9.574,
+      "fastapi_forward_status": "in_process_dispatched",
+      "verdict": "PASS"
+    }
+  ],
+  "latency_benchmarks": {
+    "1": {
+      "object_count": 1,
+      "mean_e2e_ms": 9.3854,
+      "median_p50_e2e_ms": 9.0375,
+      "p90_e2e_ms": 11.3274,
+      "p95_e2e_ms": 11.9986,
+      "p99_e2e_ms": 13.5817,
+      "max_e2e_ms": 14.418,
+      "min_e2e_ms": 6.988,
+      "std_e2e_ms": 1.4115,
+      "stage_breakdown_means_ms": {
+        "ros2_ml_inference_ms": 9.3119,
+        "fastapi_forwarding_ms": 0.0203,
+        "ros2_publish_serialization_ms": 0.007
+      },
+      "budget_ms": 50.0,
+      "budget_utilization_pct": 24.0,
+      "headroom_ms": 38.0014,
+      "throughput_objects_per_sec": 106.5,
+      "status": "PASS"
+    },
+    "5": {
+      "object_count": 5,
+      "mean_e2e_ms": 9.4141,
+      "median_p50_e2e_ms": 9.065,
+      "p90_e2e_ms": 11.5588,
+      "p95_e2e_ms": 12.6026,
+      "p99_e2e_ms": 13.0064,
+      "max_e2e_ms": 13.357,
+      "min_e2e_ms": 7.033,
+      "std_e2e_ms": 1.3385,
+      "stage_breakdown_means_ms": {
+        "ros2_ml_inference_ms": 9.295,
+        "fastapi_forwarding_ms": 0.021,
+        "ros2_publish_serialization_ms": 0.0122
+      },
+      "budget_ms": 50.0,
+      "budget_utilization_pct": 25.21,
+      "headroom_ms": 37.3974,
+      "throughput_objects_per_sec": 531.1,
+      "status": "PASS"
+    },
+    "10": {
+      "object_count": 10,
+      "mean_e2e_ms": 9.824,
+      "median_p50_e2e_ms": 9.632,
+      "p90_e2e_ms": 11.7826,
+      "p95_e2e_ms": 12.33,
+      "p99_e2e_ms": 13.4082,
+      "max_e2e_ms": 13.95,
+      "min_e2e_ms": 7.364,
+      "std_e2e_ms": 1.3019,
+      "stage_breakdown_means_ms": {
+        "ros2_ml_inference_ms": 9.6623,
+        "fastapi_forwarding_ms": 0.0211,
+        "ros2_publish_serialization_ms": 0.0167
+      },
+      "budget_ms": 50.0,
+      "budget_utilization_pct": 24.66,
+      "headroom_ms": 37.67,
+      "throughput_objects_per_sec": 1017.9,
+      "status": "PASS"
+    },
+    "20": {
+      "object_count": 20,
+      "mean_e2e_ms": 10.4084,
+      "median_p50_e2e_ms": 10.312,
+      "p90_e2e_ms": 11.9976,
+      "p95_e2e_ms": 12.5411,
+      "p99_e2e_ms": 13.7806,
+      "max_e2e_ms": 14.026,
+      "min_e2e_ms": 7.674,
+      "std_e2e_ms": 1.191,
+      "stage_breakdown_means_ms": {
+        "ros2_ml_inference_ms": 10.1568,
+        "fastapi_forwarding_ms": 0.0221,
+        "ros2_publish_serialization_ms": 0.0285
+      },
+      "budget_ms": 50.0,
+      "budget_utilization_pct": 25.08,
+      "headroom_ms": 37.4589,
+      "throughput_objects_per_sec": 1921.5,
+      "status": "PASS"
+    },
+    "50": {
+      "object_count": 50,
+      "mean_e2e_ms": 12.9918,
+      "median_p50_e2e_ms": 12.6315,
+      "p90_e2e_ms": 15.246,
+      "p95_e2e_ms": 16.2924,
+      "p99_e2e_ms": 21.3194,
+      "max_e2e_ms": 22.523,
+      "min_e2e_ms": 8.941,
+      "std_e2e_ms": 2.0547,
+      "stage_breakdown_means_ms": {
+        "ros2_ml_inference_ms": 12.4722,
+        "fastapi_forwarding_ms": 0.027,
+        "ros2_publish_serialization_ms": 0.0639
+      },
+      "budget_ms": 50.0,
+      "budget_utilization_pct": 32.58,
+      "headroom_ms": 33.7076,
+      "throughput_objects_per_sec": 3848.6,
+      "status": "PASS"
+    },
+    "100": {
+      "object_count": 100,
+      "mean_e2e_ms": 16.1907,
+      "median_p50_e2e_ms": 16.1035,
+      "p90_e2e_ms": 18.5283,
+      "p95_e2e_ms": 20.2399,
+      "p99_e2e_ms": 23.7676,
+      "max_e2e_ms": 27.957,
+      "min_e2e_ms": 11.869,
+      "std_e2e_ms": 2.1856,
+      "stage_breakdown_means_ms": {
+        "ros2_ml_inference_ms": 15.2317,
+        "fastapi_forwarding_ms": 0.036,
+        "ros2_publish_serialization_ms": 0.1214
+      },
+      "budget_ms": 50.0,
+      "budget_utilization_pct": 40.48,
+      "headroom_ms": 29.7601,
+      "throughput_objects_per_sec": 6176.4,
+      "status": "PASS"
+    }
+  },
+  "safety_boundaries": {
+    "critical_never_downgraded": "VERIFIED_PASS",
+    "warning_never_downgraded_to_safe": "VERIFIED_PASS",
+    "invalid_sensor_fault_isolation": "VERIFIED_PASS",
+    "zero_vehicle_actuation": "VERIFIED_PASS"
+  },
+  "disclaimer": "Prototype decision support output based on synthetic LiDAR features. Does NOT certify physical haul truck safety.",
+  "stage11_verdict": "STAGE_11_FULL_SYSTEM_INTEGRATION_PASSED"
+}

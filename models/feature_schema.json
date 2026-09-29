@@ -1,0 +1,43 @@
+{
+  "raw_numerical_features": [
+    "distance_m",
+    "object_x_m",
+    "object_y_m",
+    "object_z_m",
+    "object_width_m",
+    "object_height_m",
+    "object_length_m",
+    "point_count",
+    "relative_velocity_mps",
+    "truck_speed_kmph",
+    "time_to_collision_s"
+  ],
+  "raw_categorical_features": [
+    "object_type"
+  ],
+  "derived_features": [
+    "time_to_collision_s"
+  ],
+  "target_column": "risk_level",
+  "n_raw_features": 12,
+  "n_transformed_features": 17,
+  "transformed_feature_names": [
+    "distance_m",
+    "object_x_m",
+    "object_y_m",
+    "object_z_m",
+    "object_width_m",
+    "object_height_m",
+    "object_length_m",
+    "point_count",
+    "relative_velocity_mps",
+    "truck_speed_kmph",
+    "time_to_collision_s",
+    "object_type_car",
+    "object_type_truck",
+    "object_type_crane",
+    "object_type_excavator",
+    "object_type_person",
+    "object_type_unknown"
+  ]
+}

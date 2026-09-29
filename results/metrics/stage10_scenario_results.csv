@@ -1,0 +1,9 @@
+scenario_id,scenario_name,target_object_id,expected_risk,predicted_risk,class_id,confidence,prob_safe,prob_caution,prob_warning,prob_critical,prob_sum,status,argmax_valid,prob_sum_valid,recommendation,actuation_command_free,latency_ms,verdict
+Scenario_A,SAFE Obstacle,obs_A_safe_pedestrian,SAFE,SAFE,0,0.9701,0.9701,0.0295,0.0004,0.0,1.0,valid,True,True,no immediate hazard,True,25.213,PASS
+Scenario_B,CAUTION Obstacle,obs_B_caution_car,CAUTION,CAUTION,1,0.9663,0.0274,0.9663,0.0044,0.0019,1.0,valid,True,True,increased awareness / monitor,True,9.571,PASS
+Scenario_C,WARNING Obstacle,obs_C_warning_worker,WARNING,WARNING,2,0.9212,0.0049,0.0612,0.9212,0.0126,0.9999,valid,True,True,active warning / prepare intervention,True,9.016,PASS
+Scenario_D,CRITICAL Obstacle,obs_D_critical_car,CRITICAL,CRITICAL,3,0.9997,0.0,0.0,0.0002,0.9997,0.9999,valid,True,True,immediate hazard / urgent intervention,True,8.109,PASS
+Scenario_E,"Multi-Obstacle Mixed Frame (SAFE, CAUTION, WARNING, CRITICAL)",obs_E_critical,CRITICAL,CRITICAL,3,1.0,0.0,0.0,0.0,1.0,1.0,valid,True,True,immediate hazard / urgent intervention,True,8.022,PASS
+Scenario_F,Invalid Sensor Input / Malformed Obstacle,obs_F_malformed_sensor,INVALID,INVALID,-1,0.0,0.0,0.0,0.0,0.0,0.0,error,True,True,sensor validation error - do not proceed,True,0.156,PASS
+Scenario_G,Unknown Object Type,obs_G_novel_drone,SAFE,SAFE,0,0.9825,0.9825,0.0172,0.0002,0.0,0.9999,valid,True,True,no immediate hazard,True,9.162,PASS
+Scenario_H,Multiple Simultaneous Threats (WARNING + CRITICAL),obs_H_critical_object,CRITICAL,CRITICAL,3,1.0,0.0,0.0,0.0,1.0,1.0,valid,True,True,immediate hazard / urgent intervention,True,8.347,PASS

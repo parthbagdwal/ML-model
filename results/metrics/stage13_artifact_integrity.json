@@ -1,0 +1,37 @@
+{
+  "stage": 13,
+  "verification_timestamp": "2026-09-29T05:30:00Z",
+  "all_artifacts_unchanged": true,
+  "artifacts": [
+    {
+      "filename": "hgb_model.joblib",
+      "before_sha256": "f885c29d3ceddae8d2f5d7a2c1ff44fac849ec57ed498504938d632adb7f1974",
+      "after_sha256": "f885c29d3ceddae8d2f5d7a2c1ff44fac849ec57ed498504938d632adb7f1974",
+      "unchanged": true
+    },
+    {
+      "filename": "preprocessor.joblib",
+      "before_sha256": "37bc0e1366174965e741ab223ff3619c2e6fdc62e139b24ba5e8eaff3f0948da",
+      "after_sha256": "37bc0e1366174965e741ab223ff3619c2e6fdc62e139b24ba5e8eaff3f0948da",
+      "unchanged": true
+    },
+    {
+      "filename": "feature_schema.json",
+      "before_sha256": "e9ca72a4b9a9675c8e85ad2059f0448f2140891512ad4d19c10280b90d2f986b",
+      "after_sha256": "e9ca72a4b9a9675c8e85ad2059f0448f2140891512ad4d19c10280b90d2f986b",
+      "unchanged": true
+    },
+    {
+      "filename": "label_mapping.json",
+      "before_sha256": "2b5fd687a4f99cc2fcc94e3bd031c48571615193e7cff4de621a379492b17ebc",
+      "after_sha256": "2b5fd687a4f99cc2fcc94e3bd031c48571615193e7cff4de621a379492b17ebc",
+      "unchanged": true
+    },
+    {
+      "filename": "xgboost_model.json",
+      "before_sha256": "bb385fb728583b385acbd1e7a052a4579a951835473dc10b12f6dccfdfacb983",
+      "after_sha256": "bb385fb728583b385acbd1e7a052a4579a951835473dc10b12f6dccfdfacb983",
+      "unchanged": true
+    }
+  ]
+}

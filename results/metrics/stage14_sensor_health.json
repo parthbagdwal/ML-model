@@ -1,0 +1,117 @@
+{
+  "stage": "Stage 14",
+  "title": "2D LiDAR Sensor Health State Machine & Transition Specification",
+  "decoupling_invariant": "Sensor Health State (hardware/stream integrity) must NEVER be conflated with ML Risk Level (situational collision hazard). Stale or invalid sensor states MUST produce safe fallback outputs with explicit error telemetry and zero actuation commands.",
+  "states": {
+    "NO_DATA": {
+      "description": "Sensor interface initialized but no scan has been received yet.",
+      "trigger_conditions": [
+        "System startup prior to receiving first message on /scan",
+        "Stream re-initialization after driver reset",
+        "Total scans received == 0 or initial scan payload is null"
+      ],
+      "configurable_thresholds": {
+        "initial_timeout_s": 2.0
+      },
+      "engineering_rationale": "Prevents downstream perception and ML inference from running against uninitialized memory or phantom buffers.",
+      "downstream_action": "Publish empty risk frame with error 'NO_DATA', zero actuation, UI indicates sensor offline.",
+      "recovery_condition": "First valid LaserScan received transitions state to OK."
+    },
+    "OK": {
+      "description": "Sensor stream is healthy, timely, and physically valid within nominal geometric bounds.",
+      "trigger_conditions": [
+        "Scan received with age <= stale_timeout_s",
+        "Geometric parameters valid (angle_min < angle_max, angle_increment > 0, range_min < range_max)",
+        "Beam count matches expected formula: round((angle_max - angle_min) / angle_increment) + 1 (within tolerance)",
+        "Corrupted beam ratio <= (1.0 - min_valid_beam_ratio)"
+      ],
+      "configurable_thresholds": {
+        "stale_timeout_s": 0.5,
+        "min_valid_beam_ratio": 0.15,
+        "beam_count_tolerance_pct": 5.0
+      },
+      "engineering_rationale": "Ensures that ML inference operates strictly on physically plausible, timely planar LiDAR measurements.",
+      "downstream_action": "Execute 2D clustering, tracking, feature mapping, and frozen HGB model risk inference.",
+      "recovery_condition": "Maintained as long as consecutive valid scans arrive."
+    },
+    "DEGRADED": {
+      "description": "Sensor is communicating and timely, but signal quality is impaired by high noise, dust, slurry backscatter, or partial optical face fouling.",
+      "trigger_conditions": [
+        "Scan is structurally valid and age <= stale_timeout_s",
+        "Corrupted beams (NaN, negative, or below range_min) exceed (1.0 - min_valid_beam_ratio), i.e., > 85% corrupted",
+        "Sensor optics partially obscured by haul road mud or heavy dust plume"
+      ],
+      "configurable_thresholds": {
+        "min_valid_beam_ratio": 0.15,
+        "corrupted_beam_threshold_pct": 85.0
+      },
+      "engineering_rationale": "Allows partial perception to continue while warning the operator and system telemetry that sensor reliability is compromised.",
+      "downstream_action": "Evaluate remaining valid beam returns, mark risk assessment frame with sensor_health='DEGRADED', log maintenance telemetry.",
+      "recovery_condition": "Transitions back to OK when valid beam ratio rises above min_valid_beam_ratio for >= 3 consecutive frames."
+    },
+    "STALE": {
+      "description": "Sensor scan received or buffered, but timestamp age exceeds maximum allowed latency threshold.",
+      "trigger_conditions": [
+        "Scan timestamp age (now - scan_timestamp) > stale_timeout_s (0.5 s)",
+        "Communication latency spike or ROS 2 driver delay",
+        "Sensor hardware stopped broadcasting /scan while node remains alive"
+      ],
+      "configurable_thresholds": {
+        "stale_timeout_s": 0.5,
+        "max_timestamp_gap_s": 1.0
+      },
+      "engineering_rationale": "At 25 km/h, a haul truck travels 3.5 meters in 0.5 seconds. Reusing stale obstacle coordinates introduces dangerous spatial errors and violates the zero-silent-reuse invariant.",
+      "downstream_action": "Suppress stale obstacle reuse, isolate inference, publish fault frame with sensor_health='STALE', maintain advisory safe state.",
+      "recovery_condition": "Transitions back to OK upon arrival of a scan whose age <= stale_timeout_s."
+    },
+    "INVALID": {
+      "description": "Scan message is malformed, structurally corrupted, violates physical constraints, or contains 100% corrupted beams.",
+      "trigger_conditions": [
+        "LaserScan message is None or unparseable",
+        "Empty ranges array (len == 0)",
+        "angle_increment <= 0.0, NaN, or Inf",
+        "angle_min >= angle_max or either is NaN",
+        "range_min < 0.0 or range_max <= 0.0 or range_min >= range_max",
+        "Beam count mismatch > 5% vs expected geometric count",
+        "100% of beams are NaN, negative, or -Inf"
+      ],
+      "configurable_thresholds": {
+        "range_min_floor_m": 0.0,
+        "angle_increment_floor_rad": 0.0001
+      },
+      "engineering_rationale": "Malformed data structures or impossible physics indicates driver corruption, bad configuration, or sensor hardware fault. Must never enter perception math.",
+      "downstream_action": "Isolate fault, increment invalid_scans_count, publish fault frame with sensor_health='INVALID', zero actuation.",
+      "recovery_condition": "Transitions to OK only when a structurally valid, geometrically coherent scan is received."
+    }
+  },
+  "preset_profiles": {
+    "SICK_TiM781": {
+      "fov_deg": 270.0,
+      "angular_resolution_deg": 0.33,
+      "expected_scan_frequency_hz": 15.0,
+      "range_min_m": 0.05,
+      "range_max_m": 25.0
+    },
+    "Hokuyo_UST_20LX": {
+      "fov_deg": 270.0,
+      "angular_resolution_deg": 0.25,
+      "expected_scan_frequency_hz": 40.0,
+      "range_min_m": 0.06,
+      "range_max_m": 20.0
+    },
+    "RPLIDAR_S2": {
+      "fov_deg": 360.0,
+      "angular_resolution_deg": 0.12,
+      "expected_scan_frequency_hz": 10.0,
+      "range_min_m": 0.05,
+      "range_max_m": 30.0
+    },
+    "Generic_Planar_Default": {
+      "fov_deg": 180.0,
+      "angular_resolution_deg": 0.5,
+      "expected_scan_frequency_hz": 20.0,
+      "range_min_m": 0.1,
+      "range_max_m": 80.0
+    }
+  }
+}

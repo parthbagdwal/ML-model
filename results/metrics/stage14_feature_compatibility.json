@@ -1,0 +1,160 @@
+{
+  "stage": "Stage 14",
+  "title": "2D LiDAR to Frozen ML Model Feature Compatibility Matrix",
+  "disclaimer": "This value is NOT a physical 2D LiDAR measurement for all compatibility defaults.",
+  "total_features": 12,
+  "summary": {
+    "direct_2d_measurements": 4,
+    "derived_from_2d": 4,
+    "external_sensor_required": 1,
+    "not_measurable_by_2d_defaults": 3,
+    "top_5_features_cumulative_importance": 0.9784,
+    "unmeasurable_3d_features_importance": -0.0027
+  },
+  "features": [
+    {
+      "feature_name": "distance_m",
+      "classification": "DIRECT_2D_MEASUREMENT",
+      "is_compatibility_default": false,
+      "nominal_default": null,
+      "derivation_method": "Direct Euclidean range calculation: sqrt(x^2 + y^2) from LiDAR returns",
+      "hardware_source": "2D Planar LiDAR beam time-of-flight",
+      "permutation_importance_mean": 0.22804,
+      "permutation_importance_rank": 3,
+      "compatibility_disclaimer": "Physical 2D LiDAR measurement.",
+      "risk_notes": "Dominant risk factor. Highly reliable in planar scans."
+    },
+    {
+      "feature_name": "object_x_m",
+      "classification": "DIRECT_2D_MEASUREMENT",
+      "is_compatibility_default": false,
+      "nominal_default": null,
+      "derivation_method": "Longitudinal coordinate (+X forward in vehicle frame: r * cos(theta))",
+      "hardware_source": "2D Planar LiDAR polar-to-Cartesian transformation",
+      "permutation_importance_mean": 0.01691,
+      "permutation_importance_rank": 6,
+      "compatibility_disclaimer": "Physical 2D LiDAR measurement.",
+      "risk_notes": "Represents forward obstacle distance along truck centerline."
+    },
+    {
+      "feature_name": "object_y_m",
+      "classification": "DIRECT_2D_MEASUREMENT",
+      "is_compatibility_default": false,
+      "nominal_default": null,
+      "derivation_method": "Lateral coordinate (+Y left in vehicle frame: r * sin(theta))",
+      "hardware_source": "2D Planar LiDAR polar-to-Cartesian transformation",
+      "permutation_importance_mean": 0.27938,
+      "permutation_importance_rank": 2,
+      "compatibility_disclaimer": "Physical 2D LiDAR measurement.",
+      "risk_notes": "Dominant lateral factor determining whether obstacle is in haul truck travel corridor."
+    },
+    {
+      "feature_name": "object_z_m",
+      "classification": "NOT_MEASURABLE_BY_2D",
+      "is_compatibility_default": true,
+      "nominal_default": 0.0,
+      "derivation_method": "Nominal sensor mount plane default (0.0 m)",
+      "hardware_source": "None (Elevation physically unavailable from single-plane 2D LiDAR)",
+      "permutation_importance_mean": -0.00134,
+      "permutation_importance_rank": 17,
+      "compatibility_disclaimer": "This value is NOT a physical 2D LiDAR measurement.",
+      "risk_notes": "Frozen model assigns negative/negligible importance (-0.00134); default does not distort predictions."
+    },
+    {
+      "feature_name": "object_width_m",
+      "classification": "DERIVED_FROM_2D",
+      "is_compatibility_default": false,
+      "nominal_default": null,
+      "derivation_method": "Planar cross-sectional beam extremity span in sensor scan plane",
+      "hardware_source": "Cluster geometry across contiguous beam returns",
+      "permutation_importance_mean": 0.01207,
+      "permutation_importance_rank": 7,
+      "compatibility_disclaimer": "Derived from 2D planar cluster bounding box.",
+      "risk_notes": "Measures visible cross-section; occluded edges cannot be resolved in single 2D plane."
+    },
+    {
+      "feature_name": "object_height_m",
+      "classification": "NOT_MEASURABLE_BY_2D",
+      "is_compatibility_default": true,
+      "nominal_default": 1.5,
+      "derivation_method": "Nominal obstacle height baseline default (1.5 m)",
+      "hardware_source": "None (Vertical extent physically unavailable from 2D planar LiDAR)",
+      "permutation_importance_mean": -0.00141,
+      "permutation_importance_rank": 18,
+      "compatibility_disclaimer": "This value is NOT a physical 2D LiDAR measurement.",
+      "risk_notes": "Frozen model assigns negative/negligible importance (-0.00141); default does not distort predictions."
+    },
+    {
+      "feature_name": "object_length_m",
+      "classification": "DERIVED_FROM_2D",
+      "is_compatibility_default": false,
+      "nominal_default": null,
+      "derivation_method": "Radial beam depth span along cluster line of sight",
+      "hardware_source": "Cluster depth range variation in 2D scan plane",
+      "permutation_importance_mean": 0.00773,
+      "permutation_importance_rank": 9,
+      "compatibility_disclaimer": "Derived from 2D planar cluster line-of-sight depth.",
+      "risk_notes": "Trailing obstacle geometry is partially occluded in planar LiDAR returns."
+    },
+    {
+      "feature_name": "point_count",
+      "classification": "DIRECT_2D_MEASUREMENT",
+      "is_compatibility_default": false,
+      "nominal_default": null,
+      "derivation_method": "Number of contiguous beam returns clustered into 2D obstacle",
+      "hardware_source": "Count of valid 2D LaserScan range returns in cluster",
+      "permutation_importance_mean": 0.00581,
+      "permutation_importance_rank": 10,
+      "compatibility_disclaimer": "Physical 2D LiDAR return beam count.",
+      "risk_notes": "Represents 2D planar beam density; proportional to distance and angular resolution."
+    },
+    {
+      "feature_name": "relative_velocity_mps",
+      "classification": "DERIVED_FROM_2D",
+      "is_compatibility_default": false,
+      "nominal_default": null,
+      "derivation_method": "Multi-scan temporal tracking: (delta_distance / delta_time)",
+      "hardware_source": "Temporal association across consecutive 2D scan timestamps",
+      "permutation_importance_mean": 0.08772,
+      "permutation_importance_rank": 4,
+      "compatibility_disclaimer": "Derived from multi-scan 2D tracker kinematics.",
+      "risk_notes": "High model importance (8.8%). Requires >= 2 cycles to initialize; defaults to 0.0 on cycle 1."
+    },
+    {
+      "feature_name": "truck_speed_kmph",
+      "classification": "EXTERNAL_SENSOR_REQUIRED",
+      "is_compatibility_default": false,
+      "nominal_default": 25.0,
+      "derivation_method": "Vehicle CAN bus / wheel speed odometry / GNSS telemetry",
+      "hardware_source": "Haul truck powertrain telemetry (external to LiDAR)",
+      "permutation_importance_mean": 0.05700,
+      "permutation_importance_rank": 5,
+      "compatibility_disclaimer": "External vehicle sensor input; configurable default 25.0 km/h used if telemetry absent.",
+      "risk_notes": "Key kinetic risk factor (5.7%). In production, must be fed from truck CAN bus."
+    },
+    {
+      "feature_name": "time_to_collision_s",
+      "classification": "DERIVED_FROM_2D",
+      "is_compatibility_default": false,
+      "nominal_default": null,
+      "derivation_method": "Kinematic calculation: distance_m / (-relative_velocity_mps) if closing",
+      "hardware_source": "Calculated from 2D distance and 2D tracker closing velocity",
+      "permutation_importance_mean": 0.37628,
+      "permutation_importance_rank": 1,
+      "compatibility_disclaimer": "Derived from 2D distance and temporal tracking velocity.",
+      "risk_notes": "Most important feature in frozen model (37.6%). Accurately computed from 2D planar kinematics."
+    },
+    {
+      "feature_name": "object_type",
+      "classification": "COMPATIBILITY_DEFAULT",
+      "is_compatibility_default": true,
+      "nominal_default": "unknown",
+      "derivation_method": "Default 'unknown' category (or external camera/vision fusion)",
+      "hardware_source": "None (Single 2D planar slice contour cannot perform semantic classification)",
+      "permutation_importance_mean": 0.00123,
+      "permutation_importance_rank": 12,
+      "compatibility_disclaimer": "This value is NOT a physical 2D LiDAR measurement.",
+      "risk_notes": "Classification importance is negligible (<1%). Model remains primarily kinematic-driven."
+    }
+  ]
+}

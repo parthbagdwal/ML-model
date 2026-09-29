@@ -1,0 +1,64 @@
+{
+  "stage": "Stage 15",
+  "benchmark_title": "MineRakshak AI \u2014 Sustained Software Load Benchmark & Fault Recovery Verification",
+  "benchmark_timestamp": "2026-09-29T06:22:12.325034+00:00",
+  "disclaimer": "SOFTWARE/SYNTHETIC BENCHMARK \u2014 NOT PHYSICAL HARDWARE LATENCY: Measured on host CPU using 10,000 synthetic 2D LaserScan frames. Does not measure physical 2D LiDAR laser pulse time-of-flight, driver polling, or hardware bus latency.",
+  "is_physical_hardware_validated": false,
+  "physical_hardware_status": "NOT_AVAILABLE \u2014 Simulation & synthetic input only",
+  "configuration": {
+    "total_cycles": 10000,
+    "warmup_cycles": 100,
+    "simulated_sensor_fov_deg": 180.0,
+    "simulated_beam_count": 361,
+    "engineering_latency_budget_ms": 50.0,
+    "primary_model": "HistGradientBoostingClassifier (FROZEN)",
+    "temporal_tracker": "MultiScanTracker2D(gating=4.5m, alpha=0.7)"
+  },
+  "latency_metrics_ms": {
+    "mean": 39.964,
+    "std": 7.5451,
+    "min": 0.0993,
+    "p50": 39.6964,
+    "p90": 45.5415,
+    "p95": 48.3193,
+    "p99": 61.2723,
+    "max": 149.3818,
+    "budget_ms": 50.0,
+    "budget_margin_ms": 10.036,
+    "budget_compliance": "FAIL"
+  },
+  "throughput": {
+    "total_duration_s": 400.921,
+    "frames_per_second": 24.94
+  },
+  "fault_and_health_metrics": {
+    "total_faults_isolated": 60,
+    "total_health_transitions": 121,
+    "sensor_health_distribution": {
+      "OK": 9940,
+      "NO_DATA": 0,
+      "STALE": 20,
+      "INVALID": 40,
+      "DEGRADED": 0
+    },
+    "threat_level_distribution": {
+      "SAFE": 160,
+      "CAUTION": 3383,
+      "WARNING": 3567,
+      "CRITICAL": 2890
+    },
+    "simulated_condition_distribution": {
+      "empty_field": 100,
+      "nominal_multi_obstacle": 9800,
+      "degraded_dust": 40,
+      "stale_dropout": 20,
+      "invalid_negative_ranges": 20,
+      "invalid_all_nan": 20
+    }
+  },
+  "memory_metrics_mb": {
+    "start_mb": 0.0,
+    "peak_mb": 0.53,
+    "net_growth_mb": 0.38
+  }
+}

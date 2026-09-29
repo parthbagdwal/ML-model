@@ -1,0 +1,14 @@
+category,metric,xgboost,hist_gradient_boosting,difference_hgb_minus_xgb,unit,preferred_direction,winner
+Safety Priority 1,CRITICAL Recall,90.72,91.14,0.42,%,higher,HistGradientBoosting
+Safety Priority 2,CRITICAL -> SAFE Misses (Catastrophic),0.0,0.0,0.0,count,lower,Tied (0 misses)
+Safety Priority 2,CRITICAL -> CAUTION Misses (Severe),0.0,0.0,0.0,count,lower,Tied (0 misses)
+Safety Priority 2,CRITICAL Total False Negatives,44.0,42.0,-2.0,count,lower,HistGradientBoosting (-2 misses)
+Safety Priority 3,WARNING Recall,77.87,78.71,0.84,%,higher,HistGradientBoosting
+Safety Priority 4,WARNING -> SAFE Misses (Severe),0.0,0.0,0.0,count,lower,Tied (0 misses)
+Safety Priority 4,WARNING -> CAUTION Misses (Adjacent),78.0,75.0,-3.0,count,lower,HistGradientBoosting (-3 misses)
+Overall Performance,Macro F1-Score,0.8435,0.8407,-0.0028,score,higher,XGBoost
+Overall Performance,Multiclass Log Loss,0.3398,0.3425,0.0027,loss,lower,XGBoost
+Overall Performance,Accuracy,85.6,85.23,-0.37,%,higher,XGBoost
+Overall Performance,Weighted F1-Score,0.856,0.852,-0.004,score,higher,XGBoost
+Deployment & Edge,Model File Size,7.67,2.22,-5.45,MB,lower,HistGradientBoosting (3.45x smaller)
+Deployment & Edge,Single-Sample Latency,1.559,6.106,4.547,ms,lower,Both < 10ms (< 50ms budget)

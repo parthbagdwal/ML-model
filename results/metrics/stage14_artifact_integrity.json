@@ -1,0 +1,37 @@
+{
+  "stage": "Stage 14",
+  "status": "ALL_ARTIFACTS_BITWISE_IDENTICAL",
+  "all_identical": true,
+  "artifacts": {
+    "models/hgb_model.joblib": {
+      "expected_sha256": "f885c29d3ceddae8d2f5d7a2c1ff44fac849ec57ed498504938d632adb7f1974",
+      "calculated_sha256": "f885c29d3ceddae8d2f5d7a2c1ff44fac849ec57ed498504938d632adb7f1974",
+      "is_identical": true,
+      "size_bytes": 2327920
+    },
+    "models/preprocessor.joblib": {
+      "expected_sha256": "37bc0e1366174965e741ab223ff3619c2e6fdc62e139b24ba5e8eaff3f0948da",
+      "calculated_sha256": "37bc0e1366174965e741ab223ff3619c2e6fdc62e139b24ba5e8eaff3f0948da",
+      "is_identical": true,
+      "size_bytes": 1629
+    },
+    "models/feature_schema.json": {
+      "expected_sha256": "e9ca72a4b9a9675c8e85ad2059f0448f2140891512ad4d19c10280b90d2f986b",
+      "calculated_sha256": "e9ca72a4b9a9675c8e85ad2059f0448f2140891512ad4d19c10280b90d2f986b",
+      "is_identical": true,
+      "size_bytes": 947
+    },
+    "models/label_mapping.json": {
+      "expected_sha256": "2b5fd687a4f99cc2fcc94e3bd031c48571615193e7cff4de621a379492b17ebc",
+      "calculated_sha256": "2b5fd687a4f99cc2fcc94e3bd031c48571615193e7cff4de621a379492b17ebc",
+      "is_identical": true,
+      "size_bytes": 319
+    },
+    "models/xgboost_model.json": {
+      "expected_sha256": "bb385fb728583b385acbd1e7a052a4579a951835473dc10b12f6dccfdfacb983",
+      "calculated_sha256": "bb385fb728583b385acbd1e7a052a4579a951835473dc10b12f6dccfdfacb983",
+      "is_identical": true,
+      "size_bytes": 8040228
+    }
+  }
+}

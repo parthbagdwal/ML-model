@@ -1,0 +1,77 @@
+{
+  "benchmark_label": "Synthetic 2D LiDAR Software Benchmark",
+  "benchmark_date": "2026-09-28 20:19:36 UTC",
+  "disclaimer": "SYNTHETIC 2D LIDAR DATA: Generated strictly for software test verification. Does NOT connect to physical hardware. Real 2D LiDAR sensor readings are not currently available, and this data is NOT real sensor validation.",
+  "compatibility_statement": "MODEL COMPATIBILITY REQUIRES REAL-SENSOR VALIDATION",
+  "configuration": {
+    "scan_fov_deg": 180.0,
+    "scan_beam_count": 361,
+    "angular_resolution_deg": 0.5,
+    "obstacles_per_frame": 3,
+    "iterations": 500,
+    "warmup_iterations": 50,
+    "primary_model": "HistGradientBoostingClassifier (FROZEN)"
+  },
+  "stage_latencies": {
+    "point_conversion_and_filtering": {
+      "mean_ms": 0.4045,
+      "std_ms": 0.0654,
+      "median_ms": 0.4172,
+      "p90_ms": 0.4624,
+      "p95_ms": 0.4805,
+      "p99_ms": 0.5332,
+      "min_ms": 0.251,
+      "max_ms": 0.6406
+    },
+    "obstacle_extraction_and_clustering": {
+      "mean_ms": 0.4557,
+      "std_ms": 0.0754,
+      "median_ms": 0.4673,
+      "p90_ms": 0.5208,
+      "p95_ms": 0.5547,
+      "p99_ms": 0.6121,
+      "min_ms": 0.2872,
+      "max_ms": 0.6862
+    },
+    "multi_scan_tracking": {
+      "mean_ms": 0.016,
+      "std_ms": 0.0046,
+      "median_ms": 0.015,
+      "p90_ms": 0.0206,
+      "p95_ms": 0.0218,
+      "p99_ms": 0.0288,
+      "min_ms": 0.0103,
+      "max_ms": 0.0829
+    },
+    "feature_compatibility_mapping": {
+      "mean_ms": 0.0153,
+      "std_ms": 0.0041,
+      "median_ms": 0.0144,
+      "p90_ms": 0.0187,
+      "p95_ms": 0.0204,
+      "p99_ms": 0.0278,
+      "min_ms": 0.0102,
+      "max_ms": 0.0714
+    },
+    "frozen_hgb_model_inference": {
+      "mean_ms": 9.0297,
+      "std_ms": 1.1906,
+      "median_ms": 8.7909,
+      "p90_ms": 10.5395,
+      "p95_ms": 11.4951,
+      "p99_ms": 12.9649,
+      "min_ms": 6.9253,
+      "max_ms": 14.3383
+    },
+    "end_to_end_pipeline": {
+      "mean_ms": 9.922,
+      "std_ms": 1.2506,
+      "median_ms": 9.7102,
+      "p90_ms": 11.4821,
+      "p95_ms": 12.4475,
+      "p99_ms": 13.9849,
+      "min_ms": 7.5976,
+      "max_ms": 15.2224
+    }
+  }
+}

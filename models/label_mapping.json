@@ -1,0 +1,15 @@
+{
+  "class_to_int": {
+    "SAFE": 0,
+    "CAUTION": 1,
+    "WARNING": 2,
+    "CRITICAL": 3
+  },
+  "int_to_class": {
+    "0": "SAFE",
+    "1": "CAUTION",
+    "2": "WARNING",
+    "3": "CRITICAL"
+  },
+  "description": "Ordinal mapping for multi-class tree models. SAFE=0, CAUTION=1, WARNING=2, CRITICAL=3."
+}

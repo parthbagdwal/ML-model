@@ -1,0 +1,152 @@
+{
+  "manifest_version": "1.0.0",
+  "schema_version": "1.0.0",
+  "created_at": "2026-09-28T18:15:00Z",
+  "pipeline_name": "mineRakshak-risk-inference",
+  "pipeline_version": "1.0.0",
+  "author": "mineRakshak AI Safety Team",
+  "project": "mineRakshak-ai",
+  "synthetic_data_disclaimer": "This pipeline and all underlying models were trained and verified on synthetic tabular LiDAR and kinematic features approximating future ROS 2 point cloud clustering outputs. These statistical metrics demonstrate software decision boundaries and do NOT certify physical mine-site safety without field validation.",
+  "artifacts": {
+    "primary_model": {
+      "filename": "hgb_model.joblib",
+      "model_id": "hgb_multiclass_v1",
+      "model_class": "HistGradientBoostingClassifier",
+      "framework": "scikit-learn",
+      "framework_version": "1.9.1",
+      "format": "joblib",
+      "role": "primary_production",
+      "path": "models/hgb_model.joblib",
+      "sha256": "f885c29d3ceddae8d2f5d7a2c1ff44fac849ec57ed498504938d632adb7f1974",
+      "size_bytes": 2327920,
+      "size_mb": 2.22,
+      "metadata_path": "models/hgb_metadata.json",
+      "key_metrics": {
+        "test_accuracy": 0.8523,
+        "test_critical_recall": 0.9114,
+        "test_warning_recall": 0.7871,
+        "test_macro_f1": 0.8407,
+        "test_log_loss": 0.3425
+      },
+      "selection_rationale": "Selected as primary production model due to superior hazard recall on safety-critical tiers (91.14% CRITICAL, 78.71% WARNING), zero catastrophic errors, 3.45x smaller memory footprint, and native Python execution without external C++ binary bindings."
+    },
+    "secondary_model": {
+      "filename": "xgboost_model.json",
+      "model_id": "xgboost_multiclass_v1",
+      "model_class": "XGBClassifier",
+      "framework": "xgboost",
+      "framework_version": "3.4.1",
+      "format": "json",
+      "role": "secondary_benchmark_voter",
+      "path": "models/xgboost_model.json",
+      "sha256": "bb385fb728583b385acbd1e7a052a4579a951835473dc10b12f6dccfdfacb983",
+      "size_bytes": 8040228,
+      "size_mb": 7.67,
+      "metadata_path": "models/xgboost_metadata.json",
+      "key_metrics": {
+        "test_accuracy": 0.8560,
+        "test_critical_recall": 0.9072,
+        "test_warning_recall": 0.7787,
+        "test_macro_f1": 0.8435,
+        "test_log_loss": 0.3398
+      },
+      "selection_rationale": "Retained as secondary model and inference verification voter. Demonstrates 97.00% prediction agreement with the primary model and provides high vectorized batch inference throughput."
+    },
+    "preprocessor": {
+      "filename": "preprocessor.joblib",
+      "preprocessor_id": "mine_rakshak_preprocessor_v1",
+      "class_name": "MineRakshakPreprocessor",
+      "module": "src.preprocessing.preprocess",
+      "framework": "scikit-learn",
+      "format": "joblib",
+      "path": "models/preprocessor.joblib",
+      "sha256": "37bc0e1366174965e741ab223ff3619c2e6fdc62e139b24ba5e8eaff3f0948da",
+      "size_bytes": 1629,
+      "input_raw_features": 12,
+      "output_transformed_features": 17,
+      "unknown_category_strategy": "ignore",
+      "frozen": true,
+      "fit_partition": "X_train (14,000 samples)"
+    },
+    "feature_schema": {
+      "filename": "feature_schema.json",
+      "path": "models/feature_schema.json",
+      "sha256": "e9ca72a4b9a9675c8e85ad2059f0448f2140891512ad4d19c10280b90d2f986b",
+      "size_bytes": 947,
+      "n_raw_features": 12,
+      "n_transformed_features": 17,
+      "raw_numerical_features": [
+        "distance_m",
+        "object_x_m",
+        "object_y_m",
+        "object_z_m",
+        "object_width_m",
+        "object_height_m",
+        "object_length_m",
+        "point_count",
+        "relative_velocity_mps",
+        "truck_speed_kmph",
+        "time_to_collision_s"
+      ],
+      "raw_categorical_features": [
+        "object_type"
+      ],
+      "derived_features": [
+        "time_to_collision_s"
+      ],
+      "transformed_feature_names": [
+        "distance_m",
+        "object_x_m",
+        "object_y_m",
+        "object_z_m",
+        "object_width_m",
+        "object_height_m",
+        "object_length_m",
+        "point_count",
+        "relative_velocity_mps",
+        "truck_speed_kmph",
+        "time_to_collision_s",
+        "object_type_car",
+        "object_type_truck",
+        "object_type_crane",
+        "object_type_excavator",
+        "object_type_person",
+        "object_type_unknown"
+      ]
+    },
+    "label_mapping": {
+      "filename": "label_mapping.json",
+      "path": "models/label_mapping.json",
+      "sha256": "2b5fd687a4f99cc2fcc94e3bd031c48571615193e7cff4de621a379492b17ebc",
+      "size_bytes": 319,
+      "class_to_int": {
+        "SAFE": 0,
+        "CAUTION": 1,
+        "WARNING": 2,
+        "CRITICAL": 3
+      },
+      "int_to_class": {
+        "0": "SAFE",
+        "1": "CAUTION",
+        "2": "WARNING",
+        "3": "CRITICAL"
+      }
+    }
+  },
+  "runtime_environment": {
+    "python_version": "3.14.7",
+    "scikit_learn_version": "1.9.1",
+    "xgboost_version": "3.4.1",
+    "joblib_version": "1.5.3",
+    "numpy_version": "2.4.2",
+    "pandas_version": "3.0.1"
+  },
+  "operational_constraints": {
+    "max_single_sample_latency_budget_ms": 50.0,
+    "target_operating_frequency_hz": [10, 20],
+    "high_confidence_threshold": 0.90,
+    "low_confidence_threshold": 0.60,
+    "default_voter_strategy": "primary_with_secondary_arbitration",
+    "agreement_rate_on_test_set": 0.970
+  }
+}

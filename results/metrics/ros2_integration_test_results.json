@@ -1,0 +1,98 @@
+{
+  "all_tests_passed": true,
+  "total_tests": 18,
+  "passed_count": 18,
+  "failed_count": 0,
+  "test_details": [
+    {
+      "test_name": "test_01_valid_safe_like_observation",
+      "description": "1. Verify valid SAFE-like observation produces SAFE risk prediction and schema fields.",
+      "status": "PASS"
+    },
+    {
+      "test_name": "test_02_valid_caution_like_observation",
+      "description": "2. Verify valid CAUTION-like observation produces low/moderate risk evaluation.",
+      "status": "PASS"
+    },
+    {
+      "test_name": "test_03_valid_warning_like_observation",
+      "description": "3. Verify valid WARNING-like observation produces valid risk assessment.",
+      "status": "PASS"
+    },
+    {
+      "test_name": "test_04_valid_critical_like_observation",
+      "description": "4. Verify valid CRITICAL-like observation produces CRITICAL output with urgent action.",
+      "status": "PASS"
+    },
+    {
+      "test_name": "test_05_missing_required_input",
+      "description": "5. Verify omitting required field raises validation error and is handled safely.",
+      "status": "PASS"
+    },
+    {
+      "test_name": "test_06_nan_input",
+      "description": "6. Verify NaN sensor values are rejected with error status.",
+      "status": "PASS"
+    },
+    {
+      "test_name": "test_07_infinite_input",
+      "description": "7. Verify infinite sensor values are rejected with error status.",
+      "status": "PASS"
+    },
+    {
+      "test_name": "test_08_invalid_negative_physical_value",
+      "description": "8. Verify negative physical distance, speed, point count, or dimension are rejected.",
+      "status": "PASS"
+    },
+    {
+      "test_name": "test_09_unknown_object_type",
+      "description": "9. Verify unknown object type is handled safely without crashing the node.",
+      "status": "PASS"
+    },
+    {
+      "test_name": "test_10_published_output_contains_all_required_fields",
+      "description": "10. Verify published output contains all required Stage 8 fields.",
+      "status": "PASS"
+    },
+    {
+      "test_name": "test_11_published_probabilities_sum_approximately_one",
+      "description": "11. Verify predicted risk probabilities sum to approximately 1.0.",
+      "status": "PASS"
+    },
+    {
+      "test_name": "test_12_published_class_id_matches_maximum_probability",
+      "description": "12. Verify published class ID strictly matches the key with maximum probability.",
+      "status": "PASS"
+    },
+    {
+      "test_name": "test_13_node_loads_model_and_preprocessor_successfully",
+      "description": "13. Verify node loads serialized model and preprocessor successfully into memory.",
+      "status": "PASS"
+    },
+    {
+      "test_name": "test_14_multiple_consecutive_messages_produce_deterministic_predictions",
+      "description": "14. Verify repeated consecutive messages produce bitwise deterministic output.",
+      "status": "PASS"
+    },
+    {
+      "test_name": "test_15_node_handles_malformed_input_without_crashing",
+      "description": "15. Verify malformed inputs are safely isolated without terminating the node.",
+      "status": "PASS"
+    },
+    {
+      "test_name": "test_16_highest_threat_selection",
+      "description": "16. Verify fast-path threat selection prioritizes CRITICAL > WARNING > CAUTION > SAFE.",
+      "status": "PASS"
+    },
+    {
+      "test_name": "test_17_stage8_known_sample_reproduction",
+      "description": "17. Verify Stage 8 test set sample #0 prediction reproduces identically through ROS wrapper.",
+      "status": "PASS"
+    },
+    {
+      "test_name": "test_18_node_clean_shutdown",
+      "description": "18. Verify node resource cleanup and shutdown execute cleanly.",
+      "status": "PASS"
+    }
+  ]
+}

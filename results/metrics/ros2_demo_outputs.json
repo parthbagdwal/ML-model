@@ -1,0 +1,201 @@
+{
+  "timestamp": "2026-09-28T19:27:27.384021+00:00",
+  "ros2_available_on_host": false,
+  "demonstration_scenarios": {
+    "scenario_A": {
+      "description": "Distant light vehicle (SAFE)",
+      "input": {
+        "object_id": "obs_A_safe_car",
+        "distance_m": 75.0,
+        "object_x_m": 8.0,
+        "object_y_m": 74.5,
+        "object_z_m": 0.0,
+        "object_width_m": 2.0,
+        "object_height_m": 1.6,
+        "object_length_m": 4.5,
+        "point_count": 85,
+        "relative_velocity_mps": 0.0,
+        "object_type": "car",
+        "truck_speed_kmph": 18.0,
+        "time_to_collision_s": 99.9
+      }
+    },
+    "scenario_B": {
+      "description": "Working excavator at distance (CAUTION)",
+      "input": {
+        "object_id": "obs_B_caution_excavator",
+        "distance_m": 35.0,
+        "object_x_m": 6.5,
+        "object_y_m": 34.3,
+        "object_z_m": 1.0,
+        "object_width_m": 4.2,
+        "object_height_m": 3.8,
+        "object_length_m": 6.5,
+        "point_count": 450,
+        "relative_velocity_mps": -1.2,
+        "object_type": "excavator",
+        "truck_speed_kmph": 22.0,
+        "time_to_collision_s": 29.17
+      }
+    },
+    "scenario_C": {
+      "description": "Approaching crane (WARNING)",
+      "input": {
+        "object_id": "obs_C_warning_crane",
+        "distance_m": 24.0,
+        "object_x_m": -3.5,
+        "object_y_m": 23.7,
+        "object_z_m": 0.5,
+        "object_width_m": 3.2,
+        "object_height_m": 3.8,
+        "object_length_m": 8.0,
+        "point_count": 520,
+        "relative_velocity_mps": -4.8,
+        "object_type": "crane",
+        "truck_speed_kmph": 26.0,
+        "time_to_collision_s": 5.0
+      }
+    },
+    "scenario_D": {
+      "description": "Head-on collision trajectory (CRITICAL)",
+      "input": {
+        "object_id": "obs_D_critical_truck",
+        "distance_m": 6.5,
+        "object_x_m": 1.2,
+        "object_y_m": 6.3,
+        "object_z_m": 0.3,
+        "object_width_m": 3.5,
+        "object_height_m": 3.8,
+        "object_length_m": 7.5,
+        "point_count": 780,
+        "relative_velocity_mps": -9.5,
+        "object_type": "truck",
+        "truck_speed_kmph": 32.0,
+        "time_to_collision_s": 0.68
+      }
+    },
+    "scenario_E": {
+      "description": "Novel drone category (UNKNOWN TYPE)",
+      "input": {
+        "object_id": "obs_E_novel_drone",
+        "distance_m": 22.0,
+        "object_x_m": 0.5,
+        "object_y_m": 21.9,
+        "object_z_m": 2.0,
+        "object_width_m": 1.8,
+        "object_height_m": 1.2,
+        "object_length_m": 1.8,
+        "point_count": 210,
+        "relative_velocity_mps": -2.5,
+        "object_type": "unregistered_autonomous_drone",
+        "truck_speed_kmph": 20.0,
+        "time_to_collision_s": 8.8
+      }
+    },
+    "scenario_F": {
+      "description": "Corrupted sensor reading (INVALID)",
+      "input": {
+        "object_id": "obs_F_malformed_sensor_glitch",
+        "distance_m": -15.0,
+        "object_x_m": 0.0,
+        "object_y_m": 0.0,
+        "object_z_m": 0.0,
+        "object_width_m": -2.0,
+        "object_height_m": 1.5,
+        "object_length_m": 2.0,
+        "point_count": 50,
+        "relative_velocity_mps": -5.0,
+        "object_type": "truck",
+        "truck_speed_kmph": 25.0,
+        "time_to_collision_s": -1.0
+      }
+    }
+  },
+  "frame_results": {
+    "frame_id": "demo_perception_frame_001",
+    "objects_detected": 6,
+    "objects_evaluated": 5,
+    "highest_threat_level": "CRITICAL",
+    "highest_threat_object_id": "obs_D_critical_truck",
+    "total_processing_time_ms": 26.58,
+    "assessments": {
+      "obs_A_safe_car": {
+        "object_id": "obs_A_safe_car",
+        "predicted_risk_level": "SAFE",
+        "risk_code": 0,
+        "confidence": 0.9993,
+        "probabilities": {
+          "SAFE": 0.9993,
+          "CAUTION": 0.0007,
+          "WARNING": 0.0,
+          "CRITICAL": 0.0
+        },
+        "recommended_action": "no immediate hazard",
+        "inference_latency_ms": 5.254
+      },
+      "obs_B_caution_excavator": {
+        "object_id": "obs_B_caution_excavator",
+        "predicted_risk_level": "SAFE",
+        "risk_code": 0,
+        "confidence": 0.9957,
+        "probabilities": {
+          "SAFE": 0.9957,
+          "CAUTION": 0.0041,
+          "WARNING": 0.0001,
+          "CRITICAL": 0.0001
+        },
+        "recommended_action": "no immediate hazard",
+        "inference_latency_ms": 5.254
+      },
+      "obs_C_warning_crane": {
+        "object_id": "obs_C_warning_crane",
+        "predicted_risk_level": "SAFE",
+        "risk_code": 0,
+        "confidence": 0.9105,
+        "probabilities": {
+          "SAFE": 0.9105,
+          "CAUTION": 0.0874,
+          "WARNING": 0.0008,
+          "CRITICAL": 0.0013
+        },
+        "recommended_action": "no immediate hazard",
+        "inference_latency_ms": 5.254
+      },
+      "obs_D_critical_truck": {
+        "object_id": "obs_D_critical_truck",
+        "predicted_risk_level": "CRITICAL",
+        "risk_code": 3,
+        "confidence": 0.9485,
+        "probabilities": {
+          "SAFE": 0.0021,
+          "CAUTION": 0.043,
+          "WARNING": 0.0064,
+          "CRITICAL": 0.9485
+        },
+        "recommended_action": "immediate hazard / urgent intervention",
+        "inference_latency_ms": 5.254
+      },
+      "obs_E_novel_drone": {
+        "object_id": "obs_E_novel_drone",
+        "predicted_risk_level": "SAFE",
+        "risk_code": 0,
+        "confidence": 0.9613,
+        "probabilities": {
+          "SAFE": 0.9613,
+          "CAUTION": 0.0377,
+          "WARNING": 0.0005,
+          "CRITICAL": 0.0006
+        },
+        "recommended_action": "no immediate hazard",
+        "inference_latency_ms": 5.254
+      }
+    },
+    "errors": [
+      {
+        "object_id": "obs_F_malformed_sensor_glitch",
+        "error": "'distance_m' cannot be negative: -15.0"
+      }
+    ]
+  },
+  "disclaimer": "Prototype decision support output based on synthetic LiDAR features. Does NOT certify physical haul truck safety."
+}

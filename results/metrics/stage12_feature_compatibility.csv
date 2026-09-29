@@ -1,0 +1,13 @@
+feature_name,availability_2d,derivation_method,limitation
+distance_m,Available,Euclidean range to 2D cluster centroid: sqrt(x^2 + y^2),"Measures distance to nearest planar cross-section, not 3D centroid."
+object_x_m,Available,Planar longitudinal coordinate (+X forward in vehicle frame),Planar forward distance only.
+object_y_m,Available,Planar lateral coordinate (+/-Y lateral in vehicle frame),Planar lateral distance only.
+object_z_m,NOT directly available,Contract default (0.0 m nominal sensor mount plane),"2D LiDAR has single scan plane; cannot measure elevation. Do not fabricate."
+object_width_m,Approximate,Planar cluster span across beam extremities in scan plane,"Visible cross-section width only; occluded edges cannot be seen."
+object_height_m,NOT available,Contract default (1.5 m nominal baseline),2D LiDAR cannot measure vertical extent. Do not fabricate.
+object_length_m,Approximate/Conditional,Radial beam depth span along line of sight,Trailing geometry of obstacle is occluded in planar scan.
+point_count,Available,Number of beam returns clustered into 2D obstacle,"Represents 2D planar beam count, not 3D point cloud count."
+relative_velocity_mps,Multi-scan derived,"Temporal tracking across consecutive scans: delta_d / delta_t","Requires at least 2 consecutive cycles; single scan cannot measure velocity."
+truck_speed_kmph,External source,Vehicle CAN bus / GPS / odometry telemetry,Not directly measured by LiDAR sensor.
+time_to_collision_s,Derived,"Kinematic calculation: distance / (-relative_velocity) if approaching",Inherits multi-scan tracking velocity estimation uncertainties.
+object_type,NOT reliably available,"Default 'unknown' (or external vision/camera fusion tag)","Single 2D slice contour cannot distinguish car, truck, crane, or person."

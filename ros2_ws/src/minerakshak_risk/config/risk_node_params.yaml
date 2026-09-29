@@ -1,0 +1,23 @@
+# MineRakshak ROS 2 Perception-to-Risk Inference Node Configuration
+# Parameters configure topics, frozen model artifacts, and operational options.
+
+minerakshak_risk_node:
+  ros__parameters:
+    # ROS 2 Topics
+    input_topic: "/minerakshak/object_observations"
+    output_topic: "/minerakshak/risk_prediction"
+    threat_topic: "/minerakshak/highest_threat"
+
+    # Backwards-compatible topic aliases (leave empty to use input_topic/output_topic)
+    perception_topic: ""
+    risk_topic: ""
+
+    # Model and Preprocessing Artifact Paths (relative to project root or workspace)
+    model_path: "models/hgb_model.joblib"
+    preprocessor_path: "models/preprocessor.joblib"
+    feature_schema_path: "models/feature_schema.json"
+    label_mapping_path: "models/label_mapping.json"
+
+    # Execution Options
+    enable_secondary_voter: false
+    log_latency: true
